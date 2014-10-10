@@ -1,0 +1,15 @@
+<form action="{% url 'traits_web_prototype:index' %}" method="post">{% csrf_token %}
+ {{ parent_form1.as_table }}
+<br>
+{{ parent_form2.as_table }}
+     <br>
+<input type="submit" value="Calculate" />
+</form>
+
+<br>
+
+{% if result %}
+    {%  for r in result %}
+        {{ r }} <br>
+    {% endfor %}
+{% endif %}
