@@ -1,15 +1,16 @@
 from itertools import chain, combinations
+from traits_web_prototype.TraitsEvaluator.Trait import Trait
 
 __author__ = 'yuriy.vaskin'
 
 class ExtendedPunnetSquare:
-    def __init__(self, trait_map=None):
-        if not trait_map:
-            trait_map = {}
+    def __init__(self, trait=None):
+        if not trait:
+            trait = Trait()
 
         self.fathers_genes = []
         self.mothers_genes = []
-        self.trait_map = trait_map
+        self.trait = trait
         self.genotype_operator = GenotypeOperator()
         self.build_by_trait_map()
 
@@ -26,19 +27,19 @@ class ExtendedPunnetSquare:
 
     def get_traits_frequency_map(self):
         result = {}
-        for trait in self.trait_map:
+        for trait in self.trait.trait_map:
             freq = 0
-            for g in self.trait_map[trait]:
+            for g in self.trait.trait_map[trait]:
                 freq += self.get_genotype_frequency(g)
             result[trait] = freq
         return result
 
-    def set_trait_map(self, trait_map):
-        self.trait_map = trait_map
+    def set_trait(self, trait):
+        self.trait = trait
         self.build_by_trait_map()
 
     def build_by_trait_map(self):
-        alleles = self.genotype_operator.get_allele_variations(list(chain.from_iterable(self.trait_map.values())))
+        alleles = self.genotype_operator.get_allele_variations(list(chain.from_iterable(self.trait.trait_map.values())))
         self.fathers_genes = [a for a in alleles]
         self.mothers_genes = [a for a in alleles]
 
@@ -49,11 +50,10 @@ class ExtendedPunnetSquare:
         self.mothers_genes = self.reduce_genotype_by_traits(traits, self.mothers_genes)
 
     def reduce_genotype_by_traits(self, traits, genotype):
-        associated_genotypes = []
-        if not any(p in self.trait_map for p in traits):
-            associated_genotypes = list(chain.from_iterable(self.trait_map.values()))
+        if not any(p in self.trait.trait_map for p in traits):
+            associated_genotypes = list(chain.from_iterable(self.trait.trait_map.values()))
         else:
-            associated_genotypes = list(chain.from_iterable([self.trait_map[p] for p in traits if p in self.trait_map]))
+            associated_genotypes = list(chain.from_iterable([self.trait.trait_map[p] for p in traits if p in self.trait.trait_map]))
 
         possible_genotypes = self.genotype_operator.get_allele_variations(associated_genotypes)
 

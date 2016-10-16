@@ -130,7 +130,7 @@ class CrossGenotypeTestCase4(GenotypeOperatorTestCase):
 class BuildSquareFromMapTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait_map({'PT1':['AA,xx'], 'PT2' : ['BB,yy']})
+        self.psquare.set_trait(Trait({'PT1':['AA,xx'], 'PT2' : ['BB,yy']}))
 
 class BuildSquareFromMapCase1(BuildSquareFromMapTestCase):
     def runTest(self):
@@ -144,7 +144,7 @@ class BuildSquareFromMapCase2(BuildSquareFromMapTestCase):
 class ReduceByPhenotypeTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait_map(TraitsGenotypeMaps.BLOOD_TYPE)
+        self.psquare.set_trait(get_trait('BLOOD_TYPE'))
 
 class ReduceByPhenotypeTestCase1(ReduceByPhenotypeTestCase):
     def runTest(self):
@@ -155,7 +155,7 @@ class ReduceByPhenotypeTestCase1(ReduceByPhenotypeTestCase):
 class BadPhenotypeTestCase1(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait_map(TraitsGenotypeMaps.EYE_COLOR)
+        self.psquare.set_trait(get_trait('EYE_COLOR'))
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['BROWN'])
         self.psquare.reduce_by_fathers_traits(['ASF'])
@@ -164,7 +164,7 @@ class BadPhenotypeTestCase1(unittest.TestCase):
 class BadPhenotypeTestCase2(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait_map(TraitsGenotypeMaps.BLOOD_TYPE)
+        self.psquare.set_trait(get_trait('BLOOD_TYPE'))
     def runTest(self):
         fmap_all_genotypes = self.psquare.get_traits_frequency_map()
         self.psquare.reduce_by_mothers_traits(['gfdsg'])
@@ -175,7 +175,7 @@ class BadPhenotypeTestCase2(unittest.TestCase):
 class BloodTypeFrequencyMapTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait_map(TraitsGenotypeMaps.BLOOD_TYPE)
+        self.psquare.set_trait(get_trait('BLOOD_TYPE'))
 
 class BloodTypeFrequencyMapTestCase1(BloodTypeFrequencyMapTestCase):
     def runTest(self):
@@ -233,6 +233,7 @@ class BloodTypeFrequencyMapTestCase9(BloodTypeFrequencyMapTestCase):
 
 class BloodTypeFrequencyMapTestCase10(BloodTypeFrequencyMapTestCase):
     def runTest(self):
+        print self.psquare
         self.psquare.reduce_by_mothers_traits(['IV'])
         self.psquare.reduce_by_fathers_traits(['IV'])
         self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.25, 'I': 0.0, 'III': 0.25, 'IV': 0.5})
@@ -241,7 +242,7 @@ class BloodTypeFrequencyMapTestCase10(BloodTypeFrequencyMapTestCase):
 class EyeColorFrequencyMapTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait_map(TraitsGenotypeMaps.EYE_COLOR)
+        self.psquare.set_trait(get_trait('EYE_COLOR'))
 
 class EyeColorFrequencyMapTestCase1(EyeColorFrequencyMapTestCase):
     def runTest(self):
@@ -269,6 +270,7 @@ class EyeColorFrequencyMapTestCase4(EyeColorFrequencyMapTestCase):
 
 class EyeColorFrequencyMapTestCase5(EyeColorFrequencyMapTestCase):
     def runTest(self):
+        print self.psquare
         self.psquare.reduce_by_mothers_traits(['GREEN'])
         self.psquare.reduce_by_fathers_traits(['BLUE'])
         self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 0.5, 'BROWN': 0.0, 'GREEN': 0.5})
@@ -283,10 +285,11 @@ class EyeColorFrequencyMapTestCase6(EyeColorFrequencyMapTestCase):
 class RhFactorFrequencyMapTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait_map(TraitsGenotypeMaps.RH_FACTOR)
+        self.psquare.set_trait(get_trait('RH_FACTOR'))
 
 class RhFactorFrequencyMapTestCase1(RhFactorFrequencyMapTestCase):
     def runTest(self):
+        print self.psquare
         self.psquare.reduce_by_mothers_traits(['PLUS'])
         self.psquare.reduce_by_fathers_traits(['PLUS'])
         self.assertEqual(self.psquare.get_traits_frequency_map(), {'PLUS': 0.75, 'MINUS': 0.25} )

@@ -1,25 +1,12 @@
-from django.db import models
 from django import forms
+from traits_web_prototype.TraitsEvaluator import TraitsGenotypeMaps
+from traits_web_prototype.TraitsEvaluator.TraitsEvaluator import TraitsEvaluator
 
 
 class TraitsForm(forms.Form):
-    EYE_COLOR = (
-        ('BROWN', 'BROWN'),
-        ('GREEN', 'GREEN'),
-        ('BLUE', 'BLUE'),
-    )
-    eye_color = forms.ChoiceField(choices=EYE_COLOR)
+    def __init__(self, *args, **kwargs):
+        super(TraitsForm, self).__init__(*args, **kwargs)
 
-    BLOOD_TYPE = (
-        ('I', 'I'),
-        ('II', 'II'),
-        ('III', 'III'),
-        ('IV', 'IV'),
-    )
-    blood_type = forms.ChoiceField(choices=BLOOD_TYPE)
-
-    RH_TYPE = (
-        ('+', '+'),
-        ('-', '-'),
-    )
-    rh_type = forms.ChoiceField(choices=RH_TYPE)
+        for name in TraitsGenotypeMaps.NAMES.keys():
+            choices = [(p,p) for p in TraitsEvaluator.get_trait_phenotypes(name)]
+            self.fields[name] = forms.ChoiceField(choices=choices)

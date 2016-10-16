@@ -16,9 +16,8 @@ def index(request):
             result = []
             print parent_form1.cleaned_data
             teval = TraitsEvaluator()
-            result.append(teval.offspring_frequencies('EYE_COLOR', [parent_form1.cleaned_data['eye_color']], [parent_form2.cleaned_data['eye_color']]))
-            result.append(teval.offspring_frequencies('BLOOD_TYPE', [parent_form1.cleaned_data['blood_type']], [parent_form2.cleaned_data['blood_type']]))
-            result.append(teval.offspring_frequencies('RH_FACTOR', [parent_form1.cleaned_data['rh_type']], [parent_form2.cleaned_data['rh_type']]))
+            for phenotype_name in TraitsEvaluator.get_trait_names():
+                result.append(teval.offspring_frequencies(phenotype_name, [parent_form1.cleaned_data[phenotype_name]], [parent_form2.cleaned_data[phenotype_name]]))
             print result
 
             #TODO: redirect somewhere
@@ -28,6 +27,7 @@ def index(request):
                               'parent_form2': parent_form2,
                               'result' : result,
                           })
+
     else:
             parent_form1 = TraitsForm(prefix='parent_form1')
             parent_form2 = TraitsForm(prefix='parent_form2')
