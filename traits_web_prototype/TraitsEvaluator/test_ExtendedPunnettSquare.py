@@ -159,17 +159,17 @@ class BadPhenotypeTestCase1(unittest.TestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['BROWN'])
         self.psquare.reduce_by_fathers_traits(['ASF'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 0.0625, 'BROWN': 0.75, 'GREEN': 0.1875})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'BLUE': 0.0625, 'BROWN': 0.75, 'GREEN': 0.1875})
 
 class BadPhenotypeTestCase2(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
         self.psquare.set_trait(get_trait('BLOOD_TYPE'))
     def runTest(self):
-        fmap_all_genotypes = self.psquare.get_traits_frequency_map()
+        fmap_all_genotypes = self.psquare.get_traits_probability_map()
         self.psquare.reduce_by_mothers_traits(['gfdsg'])
         self.psquare.reduce_by_fathers_traits(['asdf'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), fmap_all_genotypes)
+        self.assertEqual(self.psquare.get_traits_probability_map(), fmap_all_genotypes)
 
 ######################################################
 class BloodTypeFrequencyMapTestCase(unittest.TestCase):
@@ -181,62 +181,62 @@ class BloodTypeFrequencyMapTestCase1(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['I'])
         self.psquare.reduce_by_fathers_traits(['I'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.0, 'I': 1.0, 'III': 0.0, 'IV': 0.0})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.0, 'I': 1.0, 'III': 0.0, 'IV': 0.0})
 
 class BloodTypeFrequencyMapTestCase2(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['I'])
         self.psquare.reduce_by_fathers_traits(['II'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.5, 'I': 0.5, 'III': 0.0, 'IV': 0.0})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.5, 'I': 0.5, 'III': 0.0, 'IV': 0.0})
 
 class BloodTypeFrequencyMapTestCase3(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['I'])
         self.psquare.reduce_by_fathers_traits(['III'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.0, 'I': 0.5, 'III': 0.5, 'IV': 0.0})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.0, 'I': 0.5, 'III': 0.5, 'IV': 0.0})
 
 class BloodTypeFrequencyMapTestCase4(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['I'])
         self.psquare.reduce_by_fathers_traits(['IV'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.5, 'I': 0.0, 'III': 0.5, 'IV': 0.0})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.5, 'I': 0.0, 'III': 0.5, 'IV': 0.0})
 
 class BloodTypeFrequencyMapTestCase5(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['II'])
         self.psquare.reduce_by_fathers_traits(['II'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.75, 'I': 0.25, 'III': 0.0, 'IV': 0.0} )
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.75, 'I': 0.25, 'III': 0.0, 'IV': 0.0} )
 
 class BloodTypeFrequencyMapTestCase6(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['II'])
         self.psquare.reduce_by_fathers_traits(['III'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.25, 'I': 0.25, 'III': 0.25, 'IV': 0.25})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.25, 'I': 0.25, 'III': 0.25, 'IV': 0.25})
 
 class BloodTypeFrequencyMapTestCase7(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['II'])
         self.psquare.reduce_by_fathers_traits(['IV'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.5, 'I': 0.0, 'III': 0.25, 'IV': 0.25})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.5, 'I': 0.0, 'III': 0.25, 'IV': 0.25})
 
 class BloodTypeFrequencyMapTestCase8(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['III'])
         self.psquare.reduce_by_fathers_traits(['III'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.0, 'I': 0.25, 'III': 0.75, 'IV': 0.0})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.0, 'I': 0.25, 'III': 0.75, 'IV': 0.0})
 
 class BloodTypeFrequencyMapTestCase9(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['III'])
         self.psquare.reduce_by_fathers_traits(['IV'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.25, 'I': 0.0, 'III': 0.5, 'IV': 0.25})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.25, 'I': 0.0, 'III': 0.5, 'IV': 0.25})
 
 class BloodTypeFrequencyMapTestCase10(BloodTypeFrequencyMapTestCase):
     def runTest(self):
         print self.psquare
         self.psquare.reduce_by_mothers_traits(['IV'])
         self.psquare.reduce_by_fathers_traits(['IV'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'II': 0.25, 'I': 0.0, 'III': 0.25, 'IV': 0.5})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'II': 0.25, 'I': 0.0, 'III': 0.25, 'IV': 0.5})
 
 ######################################################
 class EyeColorFrequencyMapTestCase(unittest.TestCase):
@@ -248,38 +248,38 @@ class EyeColorFrequencyMapTestCase1(EyeColorFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['BROWN'])
         self.psquare.reduce_by_fathers_traits(['BROWN'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 0.0625, 'BROWN': 0.75, 'GREEN': 0.1875})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'BLUE': 0.0625, 'BROWN': 0.75, 'GREEN': 0.1875})
 
 class EyeColorFrequencyMapTestCase2(EyeColorFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['GREEN'])
         self.psquare.reduce_by_fathers_traits(['BROWN'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 0.125, 'BROWN': 0.5, 'GREEN': 0.375})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'BLUE': 0.125, 'BROWN': 0.5, 'GREEN': 0.375})
 
 class EyeColorFrequencyMapTestCase3(EyeColorFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['BLUE'])
         self.psquare.reduce_by_fathers_traits(['BROWN'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 0.25, 'BROWN': 0.5, 'GREEN': 0.25})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'BLUE': 0.25, 'BROWN': 0.5, 'GREEN': 0.25})
 
 class EyeColorFrequencyMapTestCase4(EyeColorFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['GREEN'])
         self.psquare.reduce_by_fathers_traits(['GREEN'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 0.25, 'BROWN': 0.0, 'GREEN': 0.75})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'BLUE': 0.25, 'BROWN': 0.0, 'GREEN': 0.75})
 
 class EyeColorFrequencyMapTestCase5(EyeColorFrequencyMapTestCase):
     def runTest(self):
         print self.psquare
         self.psquare.reduce_by_mothers_traits(['GREEN'])
         self.psquare.reduce_by_fathers_traits(['BLUE'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 0.5, 'BROWN': 0.0, 'GREEN': 0.5})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'BLUE': 0.5, 'BROWN': 0.0, 'GREEN': 0.5})
 
 class EyeColorFrequencyMapTestCase6(EyeColorFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['BLUE'])
         self.psquare.reduce_by_fathers_traits(['BLUE'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'BLUE': 1.0, 'BROWN': 0.0, 'GREEN': 0.0})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'BLUE': 1.0, 'BROWN': 0.0, 'GREEN': 0.0})
 
 ######################################################
 class RhFactorFrequencyMapTestCase(unittest.TestCase):
@@ -292,19 +292,19 @@ class RhFactorFrequencyMapTestCase1(RhFactorFrequencyMapTestCase):
         print self.psquare
         self.psquare.reduce_by_mothers_traits(['PLUS'])
         self.psquare.reduce_by_fathers_traits(['PLUS'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'PLUS': 0.75, 'MINUS': 0.25} )
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'PLUS': 0.75, 'MINUS': 0.25} )
 
 class RhFactorFrequencyMapTestCase2(RhFactorFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['PLUS'])
         self.psquare.reduce_by_fathers_traits(['MINUS'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'PLUS': 0.5, 'MINUS': 0.5})
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'PLUS': 0.5, 'MINUS': 0.5})
 
 class RhFactorFrequencyMapTestCase3(RhFactorFrequencyMapTestCase):
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['MINUS'])
         self.psquare.reduce_by_fathers_traits(['MINUS'])
-        self.assertEqual(self.psquare.get_traits_frequency_map(), {'PLUS': 0.0, 'MINUS': 1.0} )
+        self.assertEqual(self.psquare.get_traits_probability_map(), {'PLUS': 0.0, 'MINUS': 1.0} )
 
 
 if __name__ == '__main__':

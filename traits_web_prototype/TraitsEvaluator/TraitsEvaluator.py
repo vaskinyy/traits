@@ -13,7 +13,7 @@ class TraitsEvaluator:
         ps = ExtendedPunnettSquare.ExtendedPunnetSquare(trait)
         ps.reduce_by_fathers_traits(father_traits)
         ps.reduce_by_mothers_traits(mother_traits)
-        return ps.get_traits_frequency_map()
+        return ps.get_traits_probability_map()
 
     @staticmethod
     def get_trait_names():

@@ -25,12 +25,12 @@ class ExtendedPunnetSquare:
                     count += 1
         return count / float(size)
 
-    def get_traits_frequency_map(self):
+    def get_traits_probability_map(self):
         result = {}
         for trait in self.trait.trait_map:
             freq = 0
             for g in self.trait.trait_map[trait]:
-                freq += self.get_genotype_frequency(g)
+                freq += self.trait.get_phenotype_probs(g, trait) * self.get_genotype_frequency(g)
             result[trait] = freq
         return result
 

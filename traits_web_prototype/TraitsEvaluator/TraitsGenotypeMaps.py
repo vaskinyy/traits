@@ -18,10 +18,22 @@ EYE_COLOR_MAP = dict(
     BLUE=['bb,bb'],
 )
 
+BITTER_TASTE_MAP = dict(
+    STRONG_TASTE=['CG', 'CC', 'GG'],
+    ALMOST_CANT_TASTE=['CC'],
+)
+
+BITTER_TASTE_PROBS = dict(
+    STRONG_TASTE=[('CC', 0.2)],
+    ALMOST_CANT_TASTE=[('CC', 0.8)],
+)
+
+
 NAMES = {
         'BLOOD_TYPE': (BLOOD_TYPE_MAP, None),
         'RH_FACTOR': (RH_FACTOR_MAP, None),
-        'EYE_COLOR': (EYE_COLOR_MAP, None)
+        'EYE_COLOR': (EYE_COLOR_MAP, None),
+        'BITTER_TASTE': (BITTER_TASTE_MAP, BITTER_TASTE_PROBS),
     }
 
 
@@ -46,10 +58,6 @@ HAIR_WHORL = dict(
     COUNTER_CLOCKWISE=['rr'],
 )
 
-BITTER_TASTE = dict(
-    STRONG_TASTE=['RR', 'Rr'],
-    ALMOST_CANT_TASTE=['rr'],
-)
 
 TONGUE_ROLLING = dict(
     ROLL=['RR', 'Rr'],

@@ -59,5 +59,13 @@ class BasicTraitsEvaluatorNegativeCase3(BasicTraitsEvaluatorCase):
         fathers_traits = []
         self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'BLUE': 0.25, 'BROWN': 0.5, 'GREEN': 0.25})
 
+class BasicTraitsEvaluatorPopulationCase1(BasicTraitsEvaluatorCase):
+    def runTest(self):
+        trait = 'BITTER_TASTE'
+        mothers_traits = ['STRONG_TASTE']
+        fathers_traits = ['ALMOST_CANT_TASTE']
+        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'STRONG_TASTE': 0.6, 'ALMOST_CANT_TASTE': 0.4})
+
+
 if __name__ == '__main__':
     unittest.main()
