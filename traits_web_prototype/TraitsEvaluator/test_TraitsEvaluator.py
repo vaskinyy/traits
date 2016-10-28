@@ -1,5 +1,7 @@
+from itertools import chain
 import unittest
-from TraitsEvaluator import *
+from traits_web_prototype.TraitsEvaluator.ExtendedPunnettSquare import ExtendedPunnetSquare
+from traits_web_prototype.TraitsEvaluator.TraitsEvaluator import TraitsEvaluator
 
 __author__ = 'yuriy.vaskin'
 
@@ -65,6 +67,45 @@ class BasicTraitsEvaluatorPopulationCase1(BasicTraitsEvaluatorCase):
         mothers_traits = ['STRONG_TASTE']
         fathers_traits = ['ALMOST_CANT_TASTE']
         self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'STRONG_TASTE': 0.6, 'ALMOST_CANT_TASTE': 0.4})
+
+######################################################
+class TraitsEvaluatorModelCase(unittest.TestCase):
+    def setUp(self):
+        self.teval = TraitsEvaluator()
+
+class TraitsEvaluatorModelAllGenotypesListed(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            psquare = ExtendedPunnetSquare(trait)
+            genotypes = psquare.get_possible_genotypes()
+            for genotype in genotypes:
+                self.assertIn(genotype, list(chain.from_iterable(trait.trait_map.values())), "Genotype %s is not in the genotype map of trait %s" % (genotype, name))
+
+class TraitsEvaluatorModelNoUnknownGenotypes(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            psquare = ExtendedPunnetSquare(trait)
+            trait_genotypes = list(chain.from_iterable(trait.trait_map.values()))
+            genotypes = psquare.get_possible_genotypes()
+            for genotype in trait_genotypes:
+                self.assertIn(genotype, genotypes, "Genotype %s is an impossible genotype of trait %s" % (genotype, name))
+
+class TraitsEvaluatorModelMapProbabilityGenotypeCorrespondence(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            trait_genotypes = list(chain.from_iterable(trait.trait_map.values()))
+            prob_genotypes = [g for (g, p) in list(chain.from_iterable(trait.phenotype_probs.values()))]
+            for pg in prob_genotypes:
+                 self.assertIn(pg, trait_genotypes, "Genotype %s of probability map is not in the genotype map of trait %s" % (pg, name))
+
+
+#bynamecorrespondence
+#sum =1
+#if shared in map must be in probs
+#full freqmap = 1
 
 
 if __name__ == '__main__':

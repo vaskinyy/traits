@@ -1,6 +1,7 @@
 import unittest
 from ExtendedPunnettSquare import *
 from TraitsGenotypeMaps import *
+from TraitsEvaluator import *
 
 __author__ = 'yuriy.vaskin'
 
@@ -144,7 +145,7 @@ class BuildSquareFromMapCase2(BuildSquareFromMapTestCase):
 class ReduceByPhenotypeTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait(get_trait('BLOOD_TYPE'))
+        self.psquare.set_trait(TraitsEvaluator.get_trait('BLOOD_TYPE'))
 
 class ReduceByPhenotypeTestCase1(ReduceByPhenotypeTestCase):
     def runTest(self):
@@ -155,7 +156,7 @@ class ReduceByPhenotypeTestCase1(ReduceByPhenotypeTestCase):
 class BadPhenotypeTestCase1(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait(get_trait('EYE_COLOR'))
+        self.psquare.set_trait(TraitsEvaluator.get_trait('EYE_COLOR'))
     def runTest(self):
         self.psquare.reduce_by_mothers_traits(['BROWN'])
         self.psquare.reduce_by_fathers_traits(['ASF'])
@@ -164,7 +165,7 @@ class BadPhenotypeTestCase1(unittest.TestCase):
 class BadPhenotypeTestCase2(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait(get_trait('BLOOD_TYPE'))
+        self.psquare.set_trait(TraitsEvaluator.get_trait('BLOOD_TYPE'))
     def runTest(self):
         fmap_all_genotypes = self.psquare.get_traits_probability_map()
         self.psquare.reduce_by_mothers_traits(['gfdsg'])
@@ -175,7 +176,7 @@ class BadPhenotypeTestCase2(unittest.TestCase):
 class BloodTypeFrequencyMapTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait(get_trait('BLOOD_TYPE'))
+        self.psquare.set_trait(TraitsEvaluator.get_trait('BLOOD_TYPE'))
 
 class BloodTypeFrequencyMapTestCase1(BloodTypeFrequencyMapTestCase):
     def runTest(self):
@@ -242,7 +243,7 @@ class BloodTypeFrequencyMapTestCase10(BloodTypeFrequencyMapTestCase):
 class EyeColorFrequencyMapTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait(get_trait('EYE_COLOR'))
+        self.psquare.set_trait(TraitsEvaluator.get_trait('EYE_COLOR'))
 
 class EyeColorFrequencyMapTestCase1(EyeColorFrequencyMapTestCase):
     def runTest(self):
@@ -285,7 +286,7 @@ class EyeColorFrequencyMapTestCase6(EyeColorFrequencyMapTestCase):
 class RhFactorFrequencyMapTestCase(unittest.TestCase):
     def setUp(self):
         self.psquare = ExtendedPunnetSquare()
-        self.psquare.set_trait(get_trait('RH_FACTOR'))
+        self.psquare.set_trait(TraitsEvaluator.get_trait('RH_FACTOR'))
 
 class RhFactorFrequencyMapTestCase1(RhFactorFrequencyMapTestCase):
     def runTest(self):

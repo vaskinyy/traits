@@ -25,6 +25,15 @@ class ExtendedPunnetSquare:
                     count += 1
         return count / float(size)
 
+    def get_possible_genotypes(self):
+        result = []
+        for p_trait in self.fathers_genes:
+            for m_trait in self.mothers_genes:
+                genotype = self.genotype_operator.cross_genotypes(p_trait,m_trait)
+                if genotype not in result:
+                    result.append(genotype)
+        return result
+
     def get_traits_probability_map(self):
         result = {}
         for trait in self.trait.trait_map:
