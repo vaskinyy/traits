@@ -102,11 +102,74 @@ class TraitsEvaluatorModelMapProbabilityGenotypeCorrespondence(TraitsEvaluatorMo
                  self.assertIn(pg, trait_genotypes, "Genotype %s of probability map is not in the genotype map of trait %s" % (pg, name))
 
 
-#bynamecorrespondence
-#sum =1
-#if shared in map must be in probs
-#full freqmap = 1
+class TraitsEvaluatorModelMapProbabilityGenotypeCorrespondenceByName(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            for phenotype in trait.trait_map.keys():
+                phenotype_genotypes = trait.trait_map[phenotype]
+                if phenotype in trait.phenotype_probs:
+                    prob_genotypes = [g for (g, p) in trait.phenotype_probs[phenotype]]
+                    for pg in prob_genotypes:
+                        self.assertIn(pg, phenotype_genotypes, "Genotype %s of probability map is not in the genotype map of trait %s with phenotype %s" % (pg, name, phenotype))
 
+
+class TraitsEvaluatorModelProbabilityCorrespondence(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            for phenotype in trait.trait_map.keys():
+                phenotype_genotypes = trait.trait_map[phenotype]
+                if phenotype in trait.phenotype_probs:
+                    prob_genotypes = [g for (g, p) in trait.phenotype_probs[phenotype]]
+                    for pg in phenotype_genotypes:
+                        if pg not in prob_genotypes:
+                            self.assertEqual(trait.get_phenotype_probs(pg, phenotype), 1, "Trait %s. Genotype %s of phenotype %s must have 1 probability" % (name, pg, phenotype))
+                else:
+                    for pg in phenotype_genotypes:
+                        self.assertEqual(trait.get_phenotype_probs(pg, phenotype), 1, "Trait %s. Genotype %s of phenotype %s must have 1 probability" % (name, pg, phenotype))
+
+
+class TraitsEvaluatorModelProbabilitySum(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            sums = {}
+            for g, p in list(chain.from_iterable(trait.phenotype_probs.values())):
+                if g in sums:
+                    sums[g] += p
+                else:
+                    sums[g] = p
+            for g in sums.keys():
+                self.assertEqual(sums[g], 1, "Trait %s. Sum of probabilities of genotype %s must be 1" % (name, g))
+
+
+class TraitsEvaluatorModelSharedGenotypesInProbs(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            prob_genotypes = [g for (g, p) in list(chain.from_iterable(trait.phenotype_probs.values()))]
+            shared_keys = []
+            for phenotype in trait.trait_map.iterkeys():
+                for g in trait.trait_map[phenotype]:
+                    for phenotype1 in trait.trait_map.iterkeys():
+                        if phenotype1 != phenotype:
+                            if g in trait.trait_map[phenotype1]:
+                                shared_keys.append(g)
+            for k in shared_keys:
+                self.assertIn(k, prob_genotypes, "Trait %s. Genotype %s is shared and must be in probability map" % (name, k))
+
+
+class TraitsEvaluatorModelFullProbabilitySum(TraitsEvaluatorModelCase):
+    def runTest(self):
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            psquare = ExtendedPunnetSquare(trait)
+            prob_map = psquare.get_traits_probability_map()
+            sum = 0
+            for p in  prob_map.itervalues():
+                sum += p
+            self.assertAlmostEqual(sum, 1.0, 7, "Trait %s. Sum of probabilities of traits must be 1" % (name))
 
 if __name__ == '__main__':
     unittest.main()

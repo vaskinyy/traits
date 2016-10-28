@@ -16,6 +16,5 @@ class Trait:
 
         return result
 
-
-
-
+    def get_phenotypes(self):
+        self.trait_map.keys()

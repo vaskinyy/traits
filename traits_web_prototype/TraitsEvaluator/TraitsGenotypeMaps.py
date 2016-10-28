@@ -7,10 +7,12 @@ BLOOD_TYPE_MAP = dict(
     IV=['AB'],
 )
 
+
 RH_FACTOR_MAP = dict(
     PLUS=['RR', 'Rr'],
     MINUS=['rr'],
 )
+
 
 EYE_COLOR_MAP = dict(
     BROWN=['BB,GG', 'BB,bG', 'BB,bb', 'Bb,GG', 'Bb,bG', 'Bb,bb'],
@@ -18,11 +20,11 @@ EYE_COLOR_MAP = dict(
     BLUE=['bb,bb'],
 )
 
+
 BITTER_TASTE_MAP = dict(
     STRONG_TASTE=['CG', 'CC', 'GG'],
     ALMOST_CANT_TASTE=['CC'],
 )
-
 BITTER_TASTE_PROBS = dict(
     STRONG_TASTE=[('CC', 0.2)],
     ALMOST_CANT_TASTE=[('CC', 0.8)],
