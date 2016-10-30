@@ -34,13 +34,22 @@ class ExtendedPunnetSquare:
                     result.append(genotype)
         return result
 
-    def get_traits_probability_map(self):
+    def get_full_probability_map(self):
         result = {}
         for trait in self.trait.trait_map:
             freq = 0
             for g in self.trait.trait_map[trait]:
                 freq += self.trait.get_phenotype_probs(g, trait) * self.get_genotype_frequency(g)
             result[trait] = freq
+        return result
+
+    def get_phenotype_probability(self, phenotype):
+        result = 1
+        if phenotype in self.trait.trait_map:
+            freq = 0
+            for g in self.trait.trait_map[phenotype]:
+                freq += self.trait.get_phenotype_probs(g, phenotype) * self.get_genotype_frequency(g)
+            result = freq
         return result
 
     def set_trait(self, trait):

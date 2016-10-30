@@ -8,17 +8,14 @@ def index_(request):
 
 def index(request):
     if request.method == 'POST':
-        print request.POST
         parent_form1 = TraitsForm(request.POST, prefix='parent_form1')
         parent_form2 = TraitsForm(request.POST, prefix='parent_form2')
         if parent_form1.is_valid() and parent_form2.is_valid():
             #calculate
             result = []
-            print parent_form1.cleaned_data
             teval = TraitsEvaluator()
             for phenotype_name in TraitsEvaluator.get_trait_names():
-                result.append(teval.offspring_frequencies(phenotype_name, [parent_form1.cleaned_data[phenotype_name]], [parent_form2.cleaned_data[phenotype_name]]))
-            print result
+                result.append(teval.offspring_probs(phenotype_name, [parent_form1.cleaned_data[phenotype_name]], [parent_form2.cleaned_data[phenotype_name]]))
 
             #TODO: redirect somewhere
             return render(request, 'traits_web_prototype/index.html',

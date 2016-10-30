@@ -8,35 +8,35 @@ __author__ = 'yuriy.vaskin'
 ######################################################
 class BasicTraitsEvaluatorCase(unittest.TestCase):
     def setUp(self):
-        self.teval = TraitsEvaluator()
+        pass
 
 class BasicTraitsEvaluatorCase1(BasicTraitsEvaluatorCase):
     def runTest(self):
         trait = 'BLOOD_TYPE'
         mothers_traits = ['I']
         fathers_traits = ['I']
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'II': 0.0, 'I': 1.0, 'III': 0.0, 'IV': 0.0})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {'II': 0.0, 'I': 1.0, 'III': 0.0, 'IV': 0.0})
 
 class BasicTraitsEvaluatorCase2(BasicTraitsEvaluatorCase):
     def runTest(self):
         trait = 'EYE_COLOR'
         mothers_traits = ['GREEN']
         fathers_traits = ['BLUE']
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'BLUE': 0.5, 'BROWN': 0.0, 'GREEN': 0.5})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {'BLUE': 0.5, 'BROWN': 0.0, 'GREEN': 0.5})
 
 class BasicTraitsEvaluatorCase3(BasicTraitsEvaluatorCase):
     def runTest(self):
         trait = 'BLOOD_TYPE'
         mothers_traits = ['I', 'II']
         fathers_traits = ['IV']
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'II': 0.5, 'I': 0.0, 'III': 0.25, 'IV': 0.25})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {'II': 0.5, 'I': 0.0, 'III': 0.25, 'IV': 0.25})
 
 class BasicTraitsEvaluatorCase4(BasicTraitsEvaluatorCase):
     def runTest(self):
         trait = 'RH_FACTOR'
         mothers_traits = ['PLUS']
         fathers_traits = ['MINUS']
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'PLUS': 0.5, 'MINUS': 0.5})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {'PLUS': 0.5, 'MINUS': 0.5})
 
 class BasicTraitsEvaluatorNegativeCase1(BasicTraitsEvaluatorCase):
     def runTest(self):
@@ -44,7 +44,7 @@ class BasicTraitsEvaluatorNegativeCase1(BasicTraitsEvaluatorCase):
         mothers_traits = ['PLUS']
         fathers_traits = ['MINUS']
 
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {})
 
 class BasicTraitsEvaluatorNegativeCase2(BasicTraitsEvaluatorCase):
     def runTest(self):
@@ -52,26 +52,47 @@ class BasicTraitsEvaluatorNegativeCase2(BasicTraitsEvaluatorCase):
         mothers_traits = ['unknown']
         fathers_traits = ['BLUE']
 
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'BLUE': 0.25, 'BROWN': 0.5, 'GREEN': 0.25})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {'BLUE': 0.25, 'BROWN': 0.5, 'GREEN': 0.25})
 
 class BasicTraitsEvaluatorNegativeCase3(BasicTraitsEvaluatorCase):
     def runTest(self):
         trait = 'EYE_COLOR'
         mothers_traits = ['BLUE']
         fathers_traits = []
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'BLUE': 0.25, 'BROWN': 0.5, 'GREEN': 0.25})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {'BLUE': 0.25, 'BROWN': 0.5, 'GREEN': 0.25})
 
 class BasicTraitsEvaluatorPopulationCase1(BasicTraitsEvaluatorCase):
     def runTest(self):
         trait = 'BITTER_TASTE'
         mothers_traits = ['STRONG_TASTE']
         fathers_traits = ['ALMOST_CANT_TASTE']
-        self.assertEqual(self.teval.offspring_frequencies(trait, mothers_traits, fathers_traits), {'STRONG_TASTE': 0.6, 'ALMOST_CANT_TASTE': 0.4})
+        self.assertEqual(TraitsEvaluator.offspring_probs(trait, mothers_traits, fathers_traits), {'STRONG_TASTE': 0.6, 'ALMOST_CANT_TASTE': 0.4})
+
+
+######################################################
+class TraitsPrinter(unittest.TestCase):
+    def runTest(self):
+        pass
+        for name in TraitsEvaluator.get_trait_names():
+            trait = TraitsEvaluator.get_trait(name)
+            phenotypes = trait.get_phenotypes()
+            pairs = []
+            print 'Trait %s' % name
+            for mp in phenotypes:
+                for fp in phenotypes:
+                    if (fp, mp) in pairs or (mp, fp) in phenotypes:
+                        continue
+                    print 'Cross %s x %s' % (mp, fp)
+                    print TraitsEvaluator.offspring_probs(trait.name, [mp], [fp])
+                    print ''
+                    pairs.append((mp, fp))
+            print '#########'
+
 
 ######################################################
 class TraitsEvaluatorModelCase(unittest.TestCase):
     def setUp(self):
-        self.teval = TraitsEvaluator()
+        pass
 
 class TraitsEvaluatorModelAllGenotypesListed(TraitsEvaluatorModelCase):
     def runTest(self):
@@ -165,11 +186,13 @@ class TraitsEvaluatorModelFullProbabilitySum(TraitsEvaluatorModelCase):
         for name in TraitsEvaluator.get_trait_names():
             trait = TraitsEvaluator.get_trait(name)
             psquare = ExtendedPunnetSquare(trait)
-            prob_map = psquare.get_traits_probability_map()
+            prob_map = psquare.get_full_probability_map()
             sum = 0
             for p in  prob_map.itervalues():
                 sum += p
             self.assertAlmostEqual(sum, 1.0, 7, "Trait %s. Sum of probabilities of traits must be 1" % (name))
+
+
 
 if __name__ == '__main__':
     unittest.main()
