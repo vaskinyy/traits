@@ -180,8 +180,10 @@ class BloodTypeFrequencyMapTestCase(unittest.TestCase):
 
 class BloodTypeFrequencyMapTestCase1(BloodTypeFrequencyMapTestCase):
     def runTest(self):
+        print self.psquare
         self.psquare.reduce_by_mothers_traits(['I'])
         self.psquare.reduce_by_fathers_traits(['I'])
+
         self.assertEqual(self.psquare.get_full_probability_map(), {'II': 0.0, 'I': 1.0, 'III': 0.0, 'IV': 0.0})
 
 class BloodTypeFrequencyMapTestCase2(BloodTypeFrequencyMapTestCase):

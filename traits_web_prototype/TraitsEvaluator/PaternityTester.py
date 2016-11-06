@@ -12,7 +12,7 @@ class PaternityTester:
 
         self.mother_traits_map = mother_traits_map
         self.father_traits_map = father_traits_map
-        self.child_traits_map = child_traits_map
+        self.child_traits_map = self.__reformat_child_map(child_traits_map)
 
         self.paternity_map = self.__paternity_map()
 
@@ -25,7 +25,9 @@ class PaternityTester:
         res = {}
         offspring_traits = self.__get_offspring_traits()
         for trait_name in offspring_traits:
-            res[trait_name] = {t:p for (t,p) in offspring_traits[trait_name].items() if not self.__is_passes_test(p) and t == self.child_traits_map[trait_name]}
+            dict = {t:p for (t,p) in offspring_traits[trait_name].items() if not self.__is_passes_test(p) and t == self.child_traits_map[trait_name]}
+            if len(dict) != 0:
+                res[trait_name] = dict
         return res
 
 
@@ -53,6 +55,18 @@ class PaternityTester:
         res = {}
         for trait_name in self.paternity_map.iterkeys():
             probs = TraitsEvaluator.offspring_probs(trait_name, self.mother_traits_map.get(trait_name, []), self.father_traits_map.get(trait_name, []))
-            #probs = {t:p for (t,p) in probs.items() if self.__is_passes_test(p)}
             res[trait_name] = probs
+        return res
+
+
+    def __reformat_child_map(self, child_map):
+        res = {}
+        for name in child_map.keys():
+            if isinstance(child_map[name], list):
+                if len(child_map[name]) == 0:
+                    res[name] = ''
+                else:
+                    res[name] = child_map[name][0]
+            else:
+                res[name] = child_map[name]
         return res

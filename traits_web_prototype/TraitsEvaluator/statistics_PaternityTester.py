@@ -56,24 +56,18 @@ class TraitsCombinations:
         return self.__get_traits(self.__get_mother_index())
 
     def get_child_traits(self):
-        return self.__get_traits(self.__get_child_index(), ischild=True)
+        return self.__get_traits(self.__get_child_index())
 
-    def __get_traits(self, index, ischild = False):
+    def __get_traits(self, index):
         res = {}
         trait_names = TraitsEvaluator.get_trait_names()
         for i in range(0, len(trait_names)):
             phenotypes = TraitsEvaluator.get_trait_phenotypes(trait_names[i])
 
             if len(phenotypes) == index[i]:
-                if ischild:
-                    res[trait_names[i]] = ''
-                else:
-                    res[trait_names[i]] = phenotypes
+                res[trait_names[i]] = phenotypes
             else:
-                if ischild:
-                    res[trait_names[i]] = phenotypes[index[i]]
-                else:
-                    res[trait_names[i]] = [ phenotypes[index[i]] ]
+                res[trait_names[i]] = [ phenotypes[index[i]] ]
         return res
 
 
