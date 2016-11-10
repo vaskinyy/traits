@@ -3,6 +3,7 @@ from traits_web_prototype.TraitsEvaluator.Trait import *
 #http://udel.edu/~mcdonald/mythearlobe.html
 #https://www.23andme.com/you/inheritance/
 #http://dna.frieger.com/calc-quick.php
+#http://genetics.thetech.org/online-exhibits/what-color-eyes-will-your-children-have
 
 BLOOD_TYPE_MAP = dict(
     I=['OO'],
