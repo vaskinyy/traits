@@ -1,0 +1,32 @@
+<form action="{% url 'traits_web_prototype:paternity' %}" method="post">{% csrf_token %}
+    <p></p><b>Parents</b></p>
+ {{ parent_form1.as_table }}
+<br>
+{{ parent_form2.as_table }}
+     <br>
+    <p><b>Child</b></p>
+{{ child_form.as_table }}
+     <br>
+<input type="submit" value="Calculate" />
+</form>
+
+<br>
+
+{% if is_father %}
+    <p>Probably, father</p>
+{% else %}
+    <p>Probably, not father</p>
+{% endif %}
+
+{% if possible %}
+    <p>Possible traits</p>
+    {{ possible }}
+{% endif %}
+
+{% if no_proof %}
+    <p>Not matching traits</p>
+    {{ no_proof }}
+{% endif %}
+
+
+
