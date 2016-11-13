@@ -1,4 +1,27 @@
-<ul>
-    <li><a href="{% url 'traits_web_prototype:paternity' %}">Paternity testing</a> </li>
-    <li><a href="{% url 'traits_web_prototype:offspring' %}">Offspring testing</a> </li>
-</ul>
+{% extends "traits_web_prototype/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+    <h1 class="page-header">Tests</h1>
+         <div class="row-fluid">
+            <div class="col-lg-2">
+                <a href="{% url 'traits_web_prototype:paternity' %}">
+              <img class="img-circle" src="{% static 'traits_web_prototype/images/paternity.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+
+                <h4>Paternity testing</h4>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a href="{% url 'traits_web_prototype:offspring' %}">
+                    <img class="img-circle" src="{% static 'traits_web_prototype/images/offspring.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+                    <h4>Offspring testing</h4>
+                </a>
+            </div>
+          </div><!-- /.row -->
+                </div>
+
+{% endblock %}
+

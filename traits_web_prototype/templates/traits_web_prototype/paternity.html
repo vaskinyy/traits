@@ -1,32 +1,55 @@
-<form action="{% url 'traits_web_prototype:paternity' %}" method="post">{% csrf_token %}
-    <p></p><b>Parents</b></p>
- {{ parent_form1.as_table }}
-<br>
-{{ parent_form2.as_table }}
-     <br>
-    <p><b>Child</b></p>
-{{ child_form.as_table }}
-     <br>
-<input type="submit" value="Calculate" />
-</form>
+{% extends "traits_web_prototype/base.html" %}
+{% load bootstrap %}
 
-<br>
+{% block content %}
+<div class="container-fluid">
+        <h1 class="page-header">Paternity test</h1>
 
-{% if is_father %}
-    <p>Probably, father</p>
-{% else %}
-    <p>Probably, not father</p>
-{% endif %}
+            <form action="{% url 'traits_web_prototype:paternity' %}" method="post">{% csrf_token %}
 
-{% if possible %}
-    <p>Possible traits</p>
-    {{ possible }}
-{% endif %}
+            <div class="row-fluid">
+                <div class="col-lg-4">
+                    <h2>Father</h2>
+                    {{ parent_form1 | bootstrap }}
+                </div>
+                <div class="col-lg-4">
+                    <h2>Mother</h2>
+                    {{ parent_form2 | bootstrap }}
+                </div>
+                <div class="col-lg-4">
+                    <h2>Child</h2>
+                    {{ child_form | bootstrap}}
+                </div>
+            </div>
 
-{% if no_proof %}
-    <p>Not matching traits</p>
-    {{ no_proof }}
-{% endif %}
+            <div class="row-fluid">
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary btn-lg" >Calculate</button>
+                </div>
+            </div>
 
+            </form>
 
+            <div class="row-fluid">
+                <div class="col-lg-8">
+                    <h2>Result</h2>
+                    {% if is_father %}
+                        <b>Unknown</b>
+                    {% else %}
+                        <b>Probably, not father</b>
+                    {% endif %}
+                    <br>
+                    {% if possible %}
+                        <p>Possible traits</p>
+                        {{ possible }}
+                    {% endif %}
+            <br>
+                    {% if no_proof %}
+                        <p>Not matching traits</p>
+                        {{ no_proof }}
+                    {% endif %}
+                </div>
+            </div>
+</div>
 
+{% endblock %}
