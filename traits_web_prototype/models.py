@@ -9,6 +9,7 @@ class TraitsForm(forms.Form):
 
         for name in TraitsEvaluator.get_trait_names():
             choices = [(p,p) for p in TraitsEvaluator.get_trait_phenotypes(name)]
+            choices.append(('unknown', 'unknown'))
             self.fields[name] = forms.ChoiceField(choices=choices)
 
 

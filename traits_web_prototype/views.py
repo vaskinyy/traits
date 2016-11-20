@@ -7,6 +7,7 @@ from traits_web_prototype.models import TraitsForm
 def index(request):
     return render(request, 'traits_web_prototype/index.html')
 
+
 def paternity(request):
     if request.method == 'POST':
         parent_form1 = TraitsForm(request.POST, prefix='parent_form1')
@@ -17,7 +18,7 @@ def paternity(request):
 
             no_proof = tester.get_no_proof_traits()
             possible = tester.get_possible_traits()
-            is_father = tester.is_father()
+            is_father = tester.is_parent()
 
 
             #TODO: redirect somewhere
@@ -45,6 +46,79 @@ def paternity(request):
               })
 
 
+def parental(request):
+    if request.method == 'POST':
+        parent_form1 = TraitsForm(request.POST, prefix='parent_form1')
+        child_form = TraitsForm(request.POST, prefix='child_form')
+        if parent_form1.is_valid()  and child_form.is_valid():
+            tester = PaternityTester(parent_form1.get_traits_map(), None, child_form.get_traits_map())
+
+            no_proof = tester.get_no_proof_traits()
+            possible = tester.get_possible_traits()
+            is_parent = tester.is_parent()
+
+
+            #TODO: redirect somewhere
+            return render(request, 'traits_web_prototype/parental.html',
+                          {
+                              'parent_form1': parent_form1,
+                              'child_form': child_form,
+                              'no_proof' : no_proof,
+                              'possible' : possible,
+                              'is_parent' : is_parent,
+                          })
+
+    else:
+            parent_form1 = TraitsForm(prefix='parent_form1')
+            child_form = TraitsForm(prefix='child_form')
+
+
+    return render(request, 'traits_web_prototype/parental.html',
+              {
+                  'parent_form1': parent_form1,
+                  'child_form': child_form,
+              })
+
+
+def grandparent(request):
+    if request.method == 'POST':
+        parent_form1 = TraitsForm(request.POST, prefix='parent_form1')
+        child_form = TraitsForm(request.POST, prefix='child_form')
+        if parent_form1.is_valid()  and child_form.is_valid():
+            grandparent_map = parent_form1.get_traits_map()
+            father_map = {}
+            for trait in grandparent_map.keys():
+                father_map[trait] = TraitsEvaluator.reduce_traits(trait, grandparent_map[trait], [], [])
+            print father_map
+            tester = PaternityTester(father_map, None, child_form.get_traits_map())
+
+            no_proof = tester.get_no_proof_traits()
+            possible = tester.get_possible_traits()
+            is_parent = tester.is_parent()
+
+
+            #TODO: redirect somewhere
+            return render(request, 'traits_web_prototype/grandparent.html',
+                          {
+                              'parent_form1': parent_form1,
+                              'child_form': child_form,
+                              'no_proof' : no_proof,
+                              'possible' : possible,
+                              'is_parent' : is_parent,
+                          })
+
+    else:
+            parent_form1 = TraitsForm(prefix='parent_form1')
+            child_form = TraitsForm(prefix='child_form')
+
+
+    return render(request, 'traits_web_prototype/grandparent.html',
+              {
+                  'parent_form1': parent_form1,
+                  'child_form': child_form,
+              })
+
+
 
 def offspring(request):
     if request.method == 'POST':
@@ -52,10 +126,12 @@ def offspring(request):
         parent_form2 = TraitsForm(request.POST, prefix='parent_form2')
         if parent_form1.is_valid() and parent_form2.is_valid():
             #calculate
-            result = []
+            result = {}
             teval = TraitsEvaluator()
             for phenotype_name in TraitsEvaluator.get_trait_names():
-                result.append(teval.offspring_probs(phenotype_name, [parent_form1.cleaned_data[phenotype_name]], [parent_form2.cleaned_data[phenotype_name]]))
+                result[phenotype_name] = teval.offspring_probs(phenotype_name, [parent_form1.cleaned_data[phenotype_name]], [parent_form2.cleaned_data[phenotype_name]])
+
+            print result
 
             #TODO: redirect somewhere
             return render(request, 'traits_web_prototype/offspring.html',

@@ -32,9 +32,18 @@
             <div class="col-lg-8">
                 {% if result %}
                     <h2>Child</h2>
-                    {%  for r in result %}
-                        {{ r }} <br>
-                    {% endfor %}
+                      <table id="formset" class="table">
+                        {% for trait, trait_dict in result.items %}
+                          <tr>
+                          <td>
+                              {{ trait }}
+                          </td>
+                          <td>
+                              {{ trait_dict }}
+                          </td>
+                          </tr>
+                        {% endfor %}
+                        </table>
                 {% endif %}
             </div>
     </div>

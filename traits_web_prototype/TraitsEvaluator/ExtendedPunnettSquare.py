@@ -68,10 +68,11 @@ class ExtendedPunnetSquare:
         self.mothers_genes = self.reduce_genotype_by_traits(traits, self.mothers_genes)
 
     def reduce_genotype_by_traits(self, traits, genotype):
-        if not any(p in self.trait.trait_map for p in traits):
-            associated_genotypes = list(chain.from_iterable(self.trait.trait_map.values()))
-        else:
+        if any(p in self.trait.trait_map for p in traits):
             associated_genotypes = list(chain.from_iterable([self.trait.trait_map[p] for p in traits if p in self.trait.trait_map]))
+        else:
+            associated_genotypes = list(chain.from_iterable(self.trait.trait_map.values()))
+
 
         possible_genotypes = self.genotype_operator.get_allele_variations(associated_genotypes)
 

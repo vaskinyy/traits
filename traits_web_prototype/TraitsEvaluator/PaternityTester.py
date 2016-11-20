@@ -2,7 +2,7 @@ from traits_web_prototype.TraitsEvaluator.TraitsEvaluator import TraitsEvaluator
 __author__ = 'yvaskin'
 
 
-PHENOTYPE_THRESHOLD = 0.1
+PHENOTYPE_THRESHOLD = 0.05
 
 class PaternityTester:
     def __init__(self,father_traits_map=None, mother_traits_map = None, child_traits_map=None):
@@ -10,14 +10,14 @@ class PaternityTester:
         if not mother_traits_map: mother_traits_map = {}
         if not child_traits_map: child_traits_map = {}
 
-        self.mother_traits_map = mother_traits_map
         self.father_traits_map = father_traits_map
+        self.mother_traits_map = mother_traits_map
         self.child_traits_map = self.__reformat_child_map(child_traits_map)
 
         self.paternity_map = self.__paternity_map()
 
 
-    def is_father(self):
+    def is_parent(self):
         return all([self.__is_passes_test(val) for val in self.paternity_map.itervalues()])
 
 
@@ -54,7 +54,7 @@ class PaternityTester:
     def __get_offspring_traits(self):
         res = {}
         for trait_name in self.paternity_map.iterkeys():
-            probs = TraitsEvaluator.offspring_probs(trait_name, self.mother_traits_map.get(trait_name, []), self.father_traits_map.get(trait_name, []))
+            probs = TraitsEvaluator.offspring_probs(trait_name, self.father_traits_map.get(trait_name, []), self.mother_traits_map.get(trait_name, []))
             res[trait_name] = probs
         return res
 

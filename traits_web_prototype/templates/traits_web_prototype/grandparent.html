@@ -3,18 +3,14 @@
 
 {% block content %}
 <div class="container-fluid">
-        <h1 class="page-header">Paternity test</h1>
+        <h1 class="page-header">Grandparent test</h1>
 
-            <form action="{% url 'traits_web_prototype:paternity' %}" method="post">{% csrf_token %}
+            <form action="{% url 'traits_web_prototype:grandparent' %}" method="post">{% csrf_token %}
 
             <div class="row-fluid">
                 <div class="col-lg-4">
-                    <h2>Father</h2>
+                    <h2>Potential Grandparent</h2>
                     {{ parent_form1 | bootstrap }}
-                </div>
-                <div class="col-lg-4">
-                    <h2>Mother</h2>
-                    {{ parent_form2 | bootstrap }}
                 </div>
                 <div class="col-lg-4">
                     <h2>Child</h2>
@@ -33,15 +29,15 @@
             <div class="row-fluid">
                 <div class="col-lg-8">
                     <h2>Result</h2>
-                    {% if is_father %}
+                    {% if is_parent %}
                         <b>Unknown</b>
                     {% else %}
-                        <b>Probably, not father</b>
+                        <b>Probably, not grandparent</b>
                     {% endif %}
                     <br>
                     {% if possible %}
                         <p>Possible traits</p>
-                         <table id="formset" class="table">
+                          <table id="formset" class="table">
                         {% for trait, trait_dict in possible.items %}
                           <tr>
                           <td>
@@ -53,12 +49,11 @@
                           </tr>
                         {% endfor %}
                         </table>
-
                     {% endif %}
             <br>
                     {% if no_proof %}
                         <p>Not matching traits</p>
-                         <table id="formset" class="table">
+                          <table id="formset" class="table">
                         {% for trait, trait_dict in no_proof.items %}
                           <tr>
                           <td>

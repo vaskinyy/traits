@@ -180,7 +180,6 @@ class BloodTypeFrequencyMapTestCase(unittest.TestCase):
 
 class BloodTypeFrequencyMapTestCase1(BloodTypeFrequencyMapTestCase):
     def runTest(self):
-        print self.psquare
         self.psquare.reduce_by_mothers_traits(['I'])
         self.psquare.reduce_by_fathers_traits(['I'])
 

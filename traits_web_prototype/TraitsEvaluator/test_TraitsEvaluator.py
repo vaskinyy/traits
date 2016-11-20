@@ -73,6 +73,7 @@ class BasicTraitsEvaluatorPopulationCase1(BasicTraitsEvaluatorCase):
 class TraitsPrinter(unittest.TestCase):
     def runTest(self):
         pass
+        """
         for name in TraitsEvaluator.get_trait_names():
             trait = TraitsEvaluator.get_trait(name)
             phenotypes = trait.get_phenotypes()
@@ -87,6 +88,7 @@ class TraitsPrinter(unittest.TestCase):
                     print ''
                     pairs.append((mp, fp))
             print '#########'
+        """
 
 
 ######################################################
@@ -127,7 +129,7 @@ class TraitsEvaluatorModelMapProbabilityGenotypeCorrespondenceByName(TraitsEvalu
     def runTest(self):
         for name in TraitsEvaluator.get_trait_names():
             trait = TraitsEvaluator.get_trait(name)
-            for phenotype in trait.trait_map.keys():
+            for phenotype in trait.get_phenotypes():
                 phenotype_genotypes = trait.trait_map[phenotype]
                 if phenotype in trait.phenotype_probs:
                     prob_genotypes = [g for (g, p) in trait.phenotype_probs[phenotype]]

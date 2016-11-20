@@ -99,7 +99,7 @@ class IsFatherCounter(StatisticsPaternityTester):
         while combinator.has_next():
             combinator.next()
             tester = PaternityTester(combinator.get_father_traits(), combinator.get_mother_traits(), combinator.get_child_traits())
-            if not tester.is_father():
+            if not tester.is_parent():
                 not_father_counter += 1
             iteration_counter += 1
             #print combinator.lenghts
