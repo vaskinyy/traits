@@ -2,7 +2,8 @@ from traits_web_prototype.TraitsEvaluator.TraitsEvaluator import TraitsEvaluator
 __author__ = 'yvaskin'
 
 
-PHENOTYPE_THRESHOLD = 0.05
+PHENOTYPE_THRESHOLD = 0.05 #red threshold
+#PHENOTYPE_THRESHOLD = 0.21 #warnign threshold
 
 class PaternityTester:
     def __init__(self,father_traits_map=None, mother_traits_map = None, child_traits_map=None):
