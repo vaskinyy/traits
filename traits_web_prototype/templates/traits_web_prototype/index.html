@@ -3,36 +3,141 @@
 
 {% block content %}
 
-    <div class="container-fluid">
+    <div class="container-fluid main-head full">
+             <h1 >Paternity test online</h1>
+             <hr class="light">
+             <p class="lead">Model your paternity test online. Here and now<br>
+                                          Known your chances before going to a lab<br>
+                                          Use basic genetics to get peace of mind</p>
+        <a href="#" class="btn btn-lg btn-outline-inverse">Get tested</a>
 
-    <h1 class="page-header">Tests</h1>
-         <div class="row-fluid">
-            <div class="col-lg-2">
-                <a href="{% url 'traits_web_prototype:paternity' %}">
-                    <img class="img-circle" src="{% static 'traits_web_prototype/images/paternity.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-                    <h4>Paternity testing</h4>
-                </a>
+
+    </div>
+
+    <div class="container-fluid marketing">
+        <h2>Let your DNA answer paternity questions now</h2>
+        <p class="lead">Traits brings biological knowledge of paternity online in a way that everyone can understand. It is for you if you are in doubt or just want to try a new technology</p>
+    </div>
+    <hr class="half-rule">
+    <div class="container-fluid features">
+        <div class="row-fluid">
+          <div class="col-sm-3">
+            <img src="assets/img/sass-less.png" alt="Simple" class="img-circle" style="width: 140px; height: 140px;">
+            <h3>Simple</h3>
+            <p>You already have information to estimate your paternity results in 10 minutes. <br><a href="{% url 'traits_web_prototype:test' %}">Give it a try</a></p>
+          </div>
+          <div class="col-sm-3">
+            <img src="assets/img/devices.png" alt="Technological" class="img-circle" style="width: 140px; height: 140px;">
+            <h3>Technology</h3>
+            <p>Our algorithms use basic genetic principals, population data and recent scientific reports to model your paternity test. We constantly update our estimations as new scientific data appears.<br><a href="{% url 'traits_web_prototype:how_it_works' %}">Learn more</a></p>
+          </div>
+          <div class="col-sm-3">
+            <img src="assets/img/components.png" alt="Free" class="img-circle" style="width: 140px; height: 140px;">
+            <h3>Free</h3>
+            <p>Online paternity test is free of charge.</p>
+          </div>
+          <div class="col-sm-3">
+            <img src="assets/img/components.png" alt="Safe" class="img-circle" style="width: 140px; height: 140px;">
+            <h3>Safe</h3>
+            <p>Your privacy is guarantied by multiple levels of security protocols and encryption.</p>
+          </div>
+        </div>
+  </div>
+<hr class="half-rule">
+    <div class="container-fluid subscribe">
+
+    <div class="col-sm-4 col-sm-offset-5">
+
+
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">@</span>
+        <input type="email" class="form-control" placeholder="Email">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button">Subscribe</button>
+      </span>
+
+    </div><!-- /input-group -->
+        <p class="text-muted">To receive genetic and paternity testing updates.</p>
+    </div>
+
+    </div>
+<hr class="half-rule">
+    <div class="container-fluid">
+    <div class="col-sm-6 info">
+        <h2>Paternity calculation</h2>
+
+        <p>How likely that a brown-eyed child has blue-eyed parents? <i>Unlikely.</i><br><br>
+        Can a child with the B blood type have parents with the A blood type? <i>Impossible in 99.9% cases.</i><br><br>
+
+        Genes are passed from parents to children under well-known laws. There are traits with relatively simple genetic basis like eye color, form of ear or hair color. Our algorithms make use of these genetic laws and population data from family studies. We can estimate if a combination of traits of a child and parents is possible.<br><br>
+
+
+        Find out how likely a combination of the traits in your case.</p>
+        <a href="#" class="btn btn-lg btn-primary">Get tested</a>
+
+    </div>
+    <div class="col-sm-6 info-img">
+    <img src="{% static 'traits_web_prototype/images/lab.jpg' %}" alt="Laboratory test">
+    </div>
+    </div>
+<hr class="half-rule">
+
+    <div class="container-fluid text-center steps  ">
+    <div class="col-sm-4">
+    <h3>1. Insert visible traits</h3>
+    </div>
+    <div class="col-sm-4">
+    <h3>2. Get the report immediately</h3>
+    </div>
+    <div class="col-sm-4">
+    <h3>3. Stay updated</h3>
+    </div>
+    </div>
+<hr class="half-rule">
+
+    <div class="container-fluid reviews">
+     <div class="row">
+            <div class="col-lg-4">
+                <img class="img-circle" src="{% static 'gmql/images/p1.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+
+                <h4>Randy</h4>
+
+                <p>"Thank you!
+There was a guy who said that he’s my son. Your site showed that it is not true, so I realized that he’s a cheater."</p>
             </div>
-             <div class="col-lg-2">
-                <a href="{% url 'traits_web_prototype:parental' %}">
-                    <img class="img-circle" src="{% static 'traits_web_prototype/images/parental.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-                    <h4>Parental testing</h4>
-                </a>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="img-circle" src="{% static 'gmql/images/p2.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+
+                <h4>Emily</h4>
+
+                <p>"We used your paternity test online to find my father. We had two candidates. I just did two online tests and one of them gave my positive result."</p>
             </div>
-            <div class="col-lg-2">
-                <a href="{% url 'traits_web_prototype:offspring' %}">
-                    <img class="img-circle" src="{% static 'traits_web_prototype/images/offspring.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-                    <h4>Offspring testing</h4>
-                </a>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="img-circle" src="{% static 'gmql/images/p3.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+
+                <h4>Lilly</h4>
+
+                <p>"I just checked that my children are really my children. Thank you for the nice resource!"</p>
             </div>
-             <div class="col-lg-2">
-                <a href="{% url 'traits_web_prototype:grandparent' %}">
-                    <img class="img-circle" src="{% static 'traits_web_prototype/images/grandparent.jpg' %}" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-                    <h4>Grandparent testing</h4>
-                </a>
-            </div>
-          </div><!-- /.row -->
-                </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+
+        <!-- FOOTER -->
+        <footer>
+            <h3 class="text-center">About</h3>
+            <hr>
+            <p class="pull-right"><a href="{% url 'traits_web_prototype:index' %}">Back to top</a></p>
+
+            <p>&copy; {% now "Y" %} Paternity test online. &middot; <a href="{% url 'traits_web_prototype:index' %}">Privacy</a> &middot; <a
+                    href="{% url 'traits_web_prototype:index' %}">Terms</a></p>
+        </footer>
+
+
 
 {% endblock %}
 

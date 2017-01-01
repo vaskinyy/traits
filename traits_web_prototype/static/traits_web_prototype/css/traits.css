@@ -1,0 +1,120 @@
+/* Padding below the footer and lighter body text */
+body{
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+/*top prevent navbar scrolling*/
+.navbar-fixed-top {
+  position: absolute;
+}
+.navbar-brand{
+    padding-right: 40px;
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+    background-color: transparent;
+}
+
+.main-head {
+    text-align: center;
+    padding-top: 150px;
+    height: 600px;
+    padding-bottom: 60px;
+}
+
+.full {
+  background: url(../images/gradient3.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+/* Since positioning the image, we need to help out the caption */
+.main-head-caption {
+  z-index: 10;
+}
+/* Declare heights because of positioning of img element */
+.main-head .item {
+  height: 600px;
+  background-color: #777;
+}
+.main-head-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 600px;
+}
+
+
+.marketing{
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.features{
+    text-align: center;
+    margin-top: 140px;
+    margin-bottom: 140px;
+}
+.subscribe  p{
+    padding-top: 5px;
+    padding-left: 40px;
+
+}
+
+.subscribe .input-group{
+    width: 70%;
+
+}
+
+.subscribe{
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.info{
+    margin-top: 140px;
+    margin-bottom: 140px;
+}
+
+.info-img > img{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.steps{
+    padding-bottom: 10px;
+}
+
+.reviews{
+    text-align: center;
+    margin-top: 140px;
+    margin-bottom: 140px;
+}
+
+hr.light{
+    margin: 25px auto 30px;
+    padding: 0;
+    max-width: 250px;
+    border: 0;
+    border-top: solid 2px;
+    text-align: center;
+    box-shadow: 0 0 10px 1px black;
+    border-color: #fff;
+}
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritence from `body` */
+  background-color: transparent;
+  border: 1px solid #fff;
+}

@@ -4,8 +4,37 @@ from traits_web_prototype.TraitsEvaluator.PaternityTester import PaternityTester
 from traits_web_prototype.TraitsEvaluator.TraitsEvaluator import TraitsEvaluator
 from traits_web_prototype.models import TraitsForm
 
+
 def index(request):
     return render(request, 'traits_web_prototype/index.html')
+
+
+def test(request):
+    return None
+
+
+def materials(request):
+    return None
+
+
+def contacts(request):
+    return None
+
+
+def login(request):
+    return None
+
+
+def signup(request):
+    return None
+
+
+def how_it_works(request):
+    return None
+
+
+def index_prototype(request):
+    return render(request, 'traits_web_prototype/index_prototype.html')
 
 
 def paternity(request):
@@ -151,3 +180,5 @@ def offspring(request):
                   'parent_form1': parent_form1,
                   'parent_form2': parent_form2,
               })
+
+
