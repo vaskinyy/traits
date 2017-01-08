@@ -17,10 +17,80 @@ body{
     background-color: transparent;
 }
 
+
+/* title */
+.navbar-brand {
+    color: #ffffff;
+    text-shadow: none;
+
+
+}
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: #ffffff;
+}
+/* link color: #96e696;*/
+.navbar-nav > li > a {
+    color: #333;
+    text-shadow: none;
+}
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+    color: rgb(90, 90, 90);
+}
+.navbar-nav > .active > a,
+.navbar-nav > .active > a:hover,
+.navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-nav > .open > a,
+.navbar-nav > .open > a:hover,
+.navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* caret */
+.navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-nav > .dropdown > a:hover .caret,
+.navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-nav > .open > a .caret,
+.navbar-nav > .open > a:hover .caret,
+.navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* mobile version */
+.navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
+
 .main-head {
     text-align: center;
     padding-top: 150px;
-    height: 600px;
+    height: 500px;
     padding-bottom: 60px;
 }
 
@@ -39,7 +109,7 @@ body{
 }
 /* Declare heights because of positioning of img element */
 .main-head .item {
-  height: 600px;
+  height: 500px;
   background-color: #777;
 }
 .main-head-inner > .item > img {
@@ -47,7 +117,7 @@ body{
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 600px;
+  height: 500px;
 }
 
 
@@ -62,7 +132,7 @@ body{
     margin-top: 140px;
     margin-bottom: 140px;
 }
-.subscribe  p{
+.subscribe p{
     padding-top: 5px;
     padding-left: 40px;
 
